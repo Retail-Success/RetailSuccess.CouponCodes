@@ -12,7 +12,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace Powell.CouponCode
+namespace RetailSuccess.CouponCodes
 {
     /// <summary>
     /// The secure random.
@@ -105,16 +105,6 @@ namespace Powell.CouponCode
         {
             this.rng.GetNonZeroBytes(data);
         }
-
-        /// <summary>
-        /// The get unique key.
-        /// </summary>
-        /// <param name="maxSize">
-        /// The max size.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
         
     }
 }

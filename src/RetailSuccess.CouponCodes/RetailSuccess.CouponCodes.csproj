@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>RetailSuccess.CouponCodes</PackageId>
+    <Title>Coupon Code Generator</Title>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <AssemblyName>RetailSuccess.CouponCodes</AssemblyName>
+  </PropertyGroup>
+
+</Project>

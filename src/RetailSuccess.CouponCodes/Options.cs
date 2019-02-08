@@ -1,4 +1,4 @@
-﻿namespace Powell.CouponCode
+﻿namespace RetailSuccess.CouponCodes
 {
     public class Options
     {

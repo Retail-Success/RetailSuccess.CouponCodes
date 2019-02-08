@@ -1,11 +1,9 @@
 using System;
 using System.Collections;
-using System.Globalization;
 using System.Linq;
 using NUnit.Framework;
-using Powell.CouponCode;
 
-namespace Powell.CouponCodeTests
+namespace RetailSuccess.CouponCodes.Tests
 {
     /// <summary>
     /// The coupon tests.

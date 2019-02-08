@@ -84,7 +84,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Powell.CouponCode
+namespace RetailSuccess.CouponCodes
 {
     /// <summary>
     /// The coupon code builder.

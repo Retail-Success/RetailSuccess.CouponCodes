@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Powells.CouponCode\Powell.CouponCode.csproj" />
+    <ProjectReference Include="..\RetailSuccess.CouponCodes\RetailSuccess.CouponCodes.csproj" />
   </ItemGroup>
 
 </Project>
