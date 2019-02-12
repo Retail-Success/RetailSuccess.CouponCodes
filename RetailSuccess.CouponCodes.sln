@@ -9,9 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RetailSuccess.CouponCodes", "RetailSuccess.CouponCodes\RetailSuccess.CouponCodes.csproj", "{2B876823-AC3A-45CE-A39F-D2E1A78B8A72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RetailSuccess.CouponCodes", "src\RetailSuccess.CouponCodes\RetailSuccess.CouponCodes.csproj", "{2B876823-AC3A-45CE-A39F-D2E1A78B8A72}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RetailSuccess.CouponCodes.Tests", "RetailSuccess.CouponCodes.Tests\RetailSuccess.CouponCodes.Tests.csproj", "{CEBEF9EA-AC41-464C-95A9-C3B9BAEAB6C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RetailSuccess.CouponCodes.Tests", "src\RetailSuccess.CouponCodes.Tests\RetailSuccess.CouponCodes.Tests.csproj", "{CEBEF9EA-AC41-464C-95A9-C3B9BAEAB6C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
