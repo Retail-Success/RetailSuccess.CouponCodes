@@ -1,15 +1,15 @@
 pool:
   name: Default
-  demands: DotNetFramework
 
-#Task group has not been exported, task groups are not supported yet
+steps:
+- script: dotnet build
 
 - task: NuGetCommand@2
   displayName: 'NuGet Push (if Release/Prerelease)'
   inputs:
     command: custom
     arguments: 'push $(Build.ArtifactStagingDirectory)\**\*.nupkg $(RetailSuccess.NugetApiKey) -Source $(RetailSuccess.NugetPublishUrl)'
-  condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], variables['ReleaseBranch']), eq(variables['Build.SourceBranch'], variables['PrereleaseBranch'])))
+    condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], variables['ReleaseBranch']), eq(variables['Build.SourceBranch'], variables['PrereleaseBranch'])))
 
 - task: NuGetCommand@2
   displayName: 'NuGet Push Symbols (if Release/Prerelease)'
@@ -29,4 +29,3 @@ pool:
   inputs:
     ArtifactName: NugetPackages
   condition: succeededOrFailed()
-
