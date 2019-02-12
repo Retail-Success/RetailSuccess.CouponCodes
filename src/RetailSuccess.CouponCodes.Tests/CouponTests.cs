@@ -10,95 +10,9 @@ namespace RetailSuccess.CouponCodes.Tests
     /// </summary>
     public class CouponCodeTests
     {
-        /// <summary>
-        /// The generate valid coupon codes also validates.
-        /// </summary>
-        /// <param name="counter">
-        /// The counter.
-        /// </param>
-        [Test, TestCaseSource("GenerateTestCases")]
-        public void GenerateValidCouponCodesAlsoValidates(int counter)
-        {
-            var opts = new Options();
-            var ccb = new CouponCodeBuilder();
-            var badWords = ccb.BadWordsList;
+        
+        
 
-            var code = ccb.Generate(opts);
-            var output = ccb.Validate(code, opts);
-
-            Console.WriteLine(code);
-
-            // check code and validation are the same
-            Assert.IsNotNull(output, string.Format("Expected test case {0} to be not null or empty.", counter));
-            Assert.AreEqual(code, output, string.Format("Expected test case {0} to ensure that the generated code and validated code match.", counter));
-
-            // assert no bad words
-            var parts = output.Split('-');
-            var contains = badWords.Any(part => parts.Any(item => part.ToUpperInvariant().Contains(item.ToUpperInvariant())));
-            Assert.IsFalse(contains, string.Format("Expected test case {0} to contain no bad words.", counter));
-        }
-
-        /// <summary>
-        /// The generate valid coupon codes also validates.
-        /// </summary>
-        /// <param name="counter">
-        /// The counter.
-        /// </param>
-        [Test, TestCaseSource("GenerateTestCases")]
-        public void GenerateLongerValidCouponCodesAlsoValidates(int counter)
-        {
-            var opts = new Options { PartLength = 10 };
-            var ccb = new CouponCodeBuilder();
-            var badWords = ccb.BadWordsList;
-
-            var code = ccb.Generate(opts);
-            var output = ccb.Validate(code, opts);
-
-            Console.WriteLine(code);
-
-            // check code and validation are the same
-            Assert.IsNotNull(output, string.Format("Expected test case {0} to be not null or empty.", counter));
-            Assert.AreEqual(code, output, string.Format("Expected test case {0} to ensure that the generated code and validated code match.", counter));
-
-            // assert no bad words
-            var parts = output.Split('-');
-            var contains = badWords.Any(part => parts.Any(item => part.ToUpperInvariant().Contains(item.ToUpperInvariant())));
-            Assert.IsFalse(contains, string.Format("Expected test case {0} to contain no bad words.", counter));
-        }
-
-        /// <summary>
-        /// The validate pre-generated coupon codes has no errors.
-        /// </summary>
-        /// <param name="code">
-        /// The code.
-        /// </param>
-        [Test, TestCaseSource("GenerateValidationTestCases")]
-        public void ValidatePregeneratedCouponCodesHasNoErrors(string code)
-        {
-            var opts = new Options();
-            var ccb = new CouponCodeBuilder();
-            var output = ccb.Validate(code, opts);
-
-            // check code and validation are the same
-            Assert.IsNotNull(output, string.Format("Expected test case {0} to be not null or empty.", code));
-            Assert.AreEqual(code, output, string.Format("Expected test case {0} to ensure that the generated code and validated code match.", code));
-        }
-
-        /// <summary>
-        /// The invalid coupon code return empty string.
-        /// </summary>
-        [Test]
-        public void InvalidCouponCodeReturnEmptyString()
-        {
-            var opts = new Options();
-            var ccb = new CouponCodeBuilder();
-
-            // valid is "9Y46-9M8E-UQB8"
-            var output = ccb.Validate("9Y46-9M8E-UQBA", opts);
-
-            // check output is empty
-            Assert.IsEmpty(output);
-        }
 
         /// <summary>
         /// The generate test cases.

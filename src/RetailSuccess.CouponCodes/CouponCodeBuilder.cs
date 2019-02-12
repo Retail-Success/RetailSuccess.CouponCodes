@@ -153,7 +153,6 @@ namespace RetailSuccess.CouponCodes
                     }
 
                     var part = sb.ToString();
-                    sb.Append(this.CheckDigitAlg1(part, i + 1));
                     parts.Add(sb.ToString());
                 }
             }
@@ -162,69 +161,14 @@ namespace RetailSuccess.CouponCodes
             return string.Join("-", parts.ToArray());
         }
 
-        /// <summary>
-        /// The validate.
-        /// </summary>
-        /// <param name="code">The code.</param>
-        /// <param name="opts">The opts.</param>
-        /// <returns>
-        /// The <see cref="string" />.
-        /// </returns>
-        /// <exception cref="System.Exception">Provide a code to be validated</exception>
-        /// <exception cref="Exception"></exception>
-        public string Validate(string code, Options opts)
+        public string ReplaceLookalikeChars(string input)
         {
-            if (string.IsNullOrEmpty(code))
-            {
-                throw new Exception("Provide a code to be validated");
-            }
-
-            // uppercase the code, replace OIZS with 0125
-            code = new string(Array.FindAll(code.ToCharArray(), char.IsLetterOrDigit))
-                .ToUpper()
-                .Replace("O", "0")
+            return input
                 .Replace("I", "1")
-                .Replace("Z", "2")
-                .Replace("S", "5");
-
-            // split in the different parts
-            var parts = new List<string>();
-            var tmp = code;
-            while (tmp.Length > 0)
-            {
-                parts.Add(tmp.Substring(0, opts.PartLength));
-                tmp = tmp.Substring(opts.PartLength);
-            }
-
-            // make sure we have been given the same number of parts as we are expecting
-            if (parts.Count != opts.Parts)
-            {
-                return string.Empty;
-            }
-
-            // validate each part
-            for (var i = 0; i < parts.Count; i++)
-            {
-                var part = parts[i];
-
-                // check this part has 4 chars
-                if (part.Length != opts.PartLength)
-                {
-                    return string.Empty;
-                }
-
-                // split out the data and the check
-                var data = part.Substring(0, opts.PartLength - 1);
-                var check = part.Substring(opts.PartLength - 1, 1);
-
-                if (Convert.ToChar(check) != this.CheckDigitAlg1(data, i + 1))
-                {
-                    return string.Empty;
-                }
-            }
-
-            // everything looked ok with this code
-            return string.Join("-", parts.ToArray());
+                .Replace("L", "1")
+                .Replace("O", "0")
+                .Replace("S", "5")
+                .Replace("Z", "2");
         }
 
         /// <summary>
@@ -268,33 +212,6 @@ namespace RetailSuccess.CouponCodes
         }
 
         /// <summary>
-        /// The check digit algorithm 1.
-        /// </summary>
-        /// <param name="data">
-        /// The data.
-        /// </param>
-        /// <param name="check">
-        /// The check.
-        /// </param>
-        /// <returns>
-        /// The <see cref="char"/>.
-        /// </returns>
-        private char CheckDigitAlg1(string data, long check)
-        {
-            // check's initial value is the part number (e.g. 3 or above)
-            // loop through the data chars
-            Array.ForEach(
-                data.ToCharArray(),
-                v =>
-                    {
-                        var k = this.symbolsDictionary[v];
-                        check = (check * 19) + k;
-                    });
-
-            return this.symbols[check % (this.symbols.Length - 1)];
-        }
-
-        /// <summary>
         /// The contains bad word.
         /// </summary>
         /// <param name="code">
@@ -313,7 +230,7 @@ namespace RetailSuccess.CouponCodes
         /// </summary>
         private void SetupSymbolsDictionary()
         {
-            const string AvailableSymbols = "0123456789ABCDEFGHJKLMNPQRTUVWXY";
+            const string AvailableSymbols = "0123456789ABCDEFGHJKMNPQRTUVWXY";
             this.symbols = AvailableSymbols.ToCharArray();
             for (var i = 0; i < this.symbols.Length; i++)
             {
