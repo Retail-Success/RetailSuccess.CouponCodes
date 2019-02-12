@@ -12,7 +12,23 @@ namespace RetailSuccess.CouponCodes.Tests
     {
         
         
+        [Test]
+        public static void GenerateCodeToOptionsSpec()
+        {
+            int parts = 2;
+            int partLength = 4;
+            var options = new Options(){ Parts = parts, PartLength = partLength};
+            var ccb = new CouponCodeBuilder();
 
+            var code =  ccb.Generate(options);
+
+            var codeParts = code.Split("-");
+            Assert.That(codeParts.Count() == parts, $"Did not generate the spcified amount of parts. Expected: {parts}, Actual: {codeParts.Count()}");
+            foreach(var part in codeParts)
+            {
+                Assert.That(part.ToCharArray().Count() == partLength, $"Did not generate enough characters. Expected count of {partLength}, but generated: {part}");
+            }
+        }
 
         /// <summary>
         /// The generate test cases.

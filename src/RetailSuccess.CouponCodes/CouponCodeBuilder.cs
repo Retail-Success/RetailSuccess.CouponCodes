@@ -147,7 +147,7 @@ namespace RetailSuccess.CouponCodes
                 for (var i = 0; i < opts.Parts; i++)
                 {
                     var sb = new StringBuilder();
-                    for (var j = 0; j < opts.PartLength - 1; j++)
+                    for (var j = 0; j < opts.PartLength; j++)
                     {
                         sb.Append(this.GetRandomSymbol());
                     }
