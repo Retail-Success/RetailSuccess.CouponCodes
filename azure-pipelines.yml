@@ -1,7 +1,7 @@
-- pool:
+pool:
   name: Default
-  demands: DotNetFramework
 
+steps:
 - script: dotnet build
 
 - task: NuGetCommand@2
@@ -9,7 +9,7 @@
   inputs:
     command: custom
     arguments: 'push $(Build.ArtifactStagingDirectory)\**\*.nupkg $(RetailSuccess.NugetApiKey) -Source $(RetailSuccess.NugetPublishUrl)'
-  condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], variables['ReleaseBranch']), eq(variables['Build.SourceBranch'], variables['PrereleaseBranch'])))
+    condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], variables['ReleaseBranch']), eq(variables['Build.SourceBranch'], variables['PrereleaseBranch'])))
 
 - task: NuGetCommand@2
   displayName: 'NuGet Push Symbols (if Release/Prerelease)'
@@ -29,4 +29,3 @@
   inputs:
     ArtifactName: NugetPackages
   condition: succeededOrFailed()
-
