@@ -1,4 +1,4 @@
-pool:
+- pool:
   name: Default
   demands: DotNetFramework
 
