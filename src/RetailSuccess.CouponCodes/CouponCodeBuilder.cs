@@ -164,6 +164,7 @@ namespace RetailSuccess.CouponCodes
         public string ReplaceLookalikeChars(string input)
         {
             return input
+                .ToUpper()
                 .Replace("I", "1")
                 .Replace("L", "1")
                 .Replace("O", "0")
