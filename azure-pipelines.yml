@@ -2,7 +2,7 @@ pool:
   name: Default
   demands: DotNetFramework
 
-#Task group has not been exported, task groups are not supported yet
+- script: dotnet build
 
 - task: NuGetCommand@2
   displayName: 'NuGet Push (if Release/Prerelease)'
