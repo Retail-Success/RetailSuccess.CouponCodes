@@ -1,0 +1,32 @@
+pool:
+  name: Default
+  demands: DotNetFramework
+
+#Task group has not been exported, task groups are not supported yet
+
+- task: NuGetCommand@2
+  displayName: 'NuGet Push (if Release/Prerelease)'
+  inputs:
+    command: custom
+    arguments: 'push $(Build.ArtifactStagingDirectory)\**\*.nupkg $(RetailSuccess.NugetApiKey) -Source $(RetailSuccess.NugetPublishUrl)'
+  condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], variables['ReleaseBranch']), eq(variables['Build.SourceBranch'], variables['PrereleaseBranch'])))
+
+- task: NuGetCommand@2
+  displayName: 'NuGet Push Symbols (if Release/Prerelease)'
+  inputs:
+    command: custom
+    arguments: 'push $(Build.ArtifactStagingDirectory)\**\*.symbols.nupkg $(RetailSuccess.NugetApiKey) -Source $(RetailSuccess.NugetSymbolsPublishUrl)'
+  condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], variables['ReleaseBranch']), eq(variables['Build.SourceBranch'], variables['PrereleaseBranch'])))
+
+- script: |
+   git tag v$(TargetVersion) $(Build.SourceVersion)
+   git -c http.extraheader="AUTHORIZATION: basic $(GitBasicAuthDigest)" push origin refs/tags/v$(TargetVersion)
+  displayName: 'Git Tag (if Release)'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], variables['ReleaseBranch']))
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: NugetPackages'
+  inputs:
+    ArtifactName: NugetPackages
+  condition: succeededOrFailed()
+
