@@ -161,7 +161,7 @@ namespace RetailSuccess.CouponCodes
             return string.Join("-", parts.ToArray());
         }
 
-        public string ReplaceLookalikeChars(string input)
+        public string SanatizePromoCode(string input)
         {
             return input
                 .ToUpper()
@@ -169,7 +169,8 @@ namespace RetailSuccess.CouponCodes
                 .Replace("L", "1")
                 .Replace("O", "0")
                 .Replace("S", "5")
-                .Replace("Z", "2");
+                .Replace("Z", "2")
+                .Replace("-",String.Empty);
         }
 
         /// <summary>
