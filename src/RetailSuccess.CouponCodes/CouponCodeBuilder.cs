@@ -170,7 +170,7 @@ namespace RetailSuccess.CouponCodes
                 .Replace("O", "0")
                 .Replace("S", "5")
                 .Replace("Z", "2")
-                .Replace("-",String.Empty);
+                .Replace("-",String.Empty).Replace(" ",string.Empty);
         }
 
         /// <summary>
